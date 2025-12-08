@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Communications Lab with Jack - Fall 2025</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+        font-weight: bold;
+      }
+
+      body {
+        background-color: #000;
+      }
+
+      main {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+      }
+
+      .item {
+        width: 100%;
+        text-align: center;
+        flex-grow: 1;
+        display: flex;
+      }
+
+      .name {
+        width: 100%;
+        position: relative;
+        margin: auto;
+        text-transform: uppercase;
+        font-size: calc(100vh / 24);
+        left: 0;
+        transition:
+          left 0.2s ease-out,
+          color 0.2s ease-out,
+          text-shadow 0.2s ease-out;
+      }
+
+      a {
+        color: #cd7f32;
+      }
+
+      a:hover {
+        color: #ffdf00;
+        text-shadow: 0 0 1em #ffdf00;
+      }
+
+      @media only screen and (max-width: 600px) {
+        .name {
+          position: static;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main></main>
+    <script>
+      const links = [
+        { text: "Mhara", url: "#" },
+        { text: "Areeba", url: "#" },
+        { text: "Maitha", url: "#" },
+        { text: "Mouza", url: "#" },
+        { text: "Taif", url: "#" },
+        { text: "Meera", url: "#" },
+        { text: "Morris", url: "#" },
+        { text: "Xiaotian", url: "#" },
+        { text: "Jihee", url: "#" },
+        { text: "Yara", url: "#" },
+        { text: "Mikaela", url: "#" },
+        { text: "Sohaila", url: "#" },
+        { text: "Micah", url: "#" },
+        { text: "Kashish", url: "#" },
+        { text: "Anika", url: "#" },
+        { text: "Izza", url: "#" },
+      ];
+      const container = document.querySelector("main");
+      const elements = links.map((link) => {
+        const div = document.createElement("div");
+        const a = document.createElement("a");
+        div.classList.add("item");
+        a.setAttribute("href", link.url);
+        a.setAttribute("target", "_blank");
+        a.classList.add("name");
+        a.innerHTML = link.text;
+        div.appendChild(a);
+        container.appendChild(div);
+        return a;
+      });
+
+      document.addEventListener("mousemove", (event) => {
+        const mouseX = event.clientX / window.innerWidth;
+        const mouseY = event.clientY / window.innerHeight;
+        elements.forEach((element, index, arr) => {
+          const progress = index / arr.length;
+          const mouseOffsetX = event.clientX - window.innerWidth / 2;
+          const mouseOffsetY = Math.abs(index / arr.length - event.clientY / window.innerHeight);
+          const offsetFactor = Math.cos(mouseOffsetY * Math.PI);
+          element.style.left = `${mouseOffsetX * offsetFactor}px`;
+        });
+      });
+    </script>
+  </body>
+</html>
